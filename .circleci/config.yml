@@ -22,12 +22,12 @@ jobs:
 workflows:
   pipeline:
     jobs:
-      - generate_synthetic_data  # Runs on every push to main
+      - generate_synthetic_data
 
   scheduled_pipeline:
     triggers:
       - schedule:
-          cron: "59 23 * * *"
+          cron: "59 23 * * *"   # Cron to scehdule workflow on 23:59 everyday.
           filters:
             branches:
               only:
