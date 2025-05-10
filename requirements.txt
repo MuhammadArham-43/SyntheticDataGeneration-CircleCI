@@ -1,0 +1,4 @@
+duckduckgo-search
+together
+requests
+BeautifulSoup4
