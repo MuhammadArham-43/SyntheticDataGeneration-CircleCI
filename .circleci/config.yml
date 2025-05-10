@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  process_datasets:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: Scraped Relevant Data
+          command: python scrape.py
+      - run:
+          name: Generate QA Pairs for LLM
+          command: python generate.py
+
+workflows:
+  pipeline:
+    jobs:
+      - generate_synthetic_data  # Runs on every push to main
+
+  scheduled_pipeline:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"  # Runs every day at 00:00 UTC
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - generate_synthetic_data
