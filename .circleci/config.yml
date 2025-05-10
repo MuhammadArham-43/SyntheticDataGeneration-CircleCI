@@ -15,6 +15,9 @@ jobs:
       - run:
           name: Generate QA Pairs for LLM
           command: python generate.py
+      - store_artifacts:
+          path: data
+          destination: synthetic-data
 
 workflows:
   pipeline:
