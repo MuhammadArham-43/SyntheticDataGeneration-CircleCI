@@ -6,7 +6,7 @@ from together import Together
 
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 assert TOGETHER_API_KEY, "Together API key is requierd to generate data"
-CLEINT = Together()
+CLIENT = Together()
 
 def build_prompt(title, context):
     return f"""You are an AI assistant that generates training data for large language models.
@@ -29,7 +29,7 @@ Enclose JSON between ```json and ``` code blocks.
 def generate_qa(title, content, model="mistralai/Mixtral-8x7B-Instruct-v0.1"):
     prompt = build_prompt(title, content)
     
-    response = CLEINT.chat.completions.create(
+    response = CLIENT.chat.completions.create(
         messages=[
             {
                 "role": "system", 
