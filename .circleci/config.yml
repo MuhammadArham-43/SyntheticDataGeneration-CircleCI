@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  process_datasets:
+  generate_synthetic_data:
     docker:
       - image: cimg/python:3.10
     steps:
@@ -10,7 +10,7 @@ jobs:
           name: Install Dependencies
           command: pip install -r requirements.txt
       - run:
-          name: Scraped Relevant Data
+          name: Scrape Relevant Data
           command: python scrape.py
       - run:
           name: Generate QA Pairs for LLM
